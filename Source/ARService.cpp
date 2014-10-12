@@ -26,7 +26,8 @@ namespace AR
 		_reason(0),
 		_state(State::Disconnected),
 		_wakeup(false),
-		_name(name)
+		_name(name),
+		_canSleep(true)
 	{}
 	
 	Service::~Service()
@@ -72,6 +73,9 @@ namespace AR
 	}
 	
 	
+	void Service::Update()
+	{}
+	
 	
 	Service::State Service::ConnectInternal()
 	{
@@ -88,6 +92,12 @@ namespace AR
 	{
 		_state = state;
 	}
+	
+	void Service::SetCanSleep(bool value)
+	{
+		_canSleep = value;
+	}
+	
 	
 	void Service::Wakeup(WakeupReason reason)
 	{
@@ -106,11 +116,13 @@ namespace AR
 	{
 		while(1)
 		{
-			std::unique_lock<std::mutex> lock(_mutex);
-			_signal.wait_for(lock, std::chrono::milliseconds(10));
-			_wakeup = false;
-			
-			lock.unlock();
+			if(_canSleep)
+			{
+				std::unique_lock<std::mutex> lock(_mutex);
+				_signal.wait_for(lock, std::chrono::milliseconds(10));
+				_wakeup = false;
+				lock.unlock();
+			}
 			
 			if(_reason & WakeupReason::Shutdown)
 				return;

@@ -20,6 +20,7 @@
 #define __libARDrone__ARVideoService__
 
 #include <vector>
+#include <list>
 #include <functional>
 #include "ARService.h"
 #include "ARSocket.h"
@@ -92,8 +93,10 @@ namespace AR
 		void Tick(uint32_t reason) override;
 		State ConnectInternal() override;
 		void DisconnectInternal() override;
+		void Update() override;
 		
 	private:
+		void SendFrame();
 		void HandleFrame(std::vector<uint8_t> &frame);
 		size_t FindPaveHeader(size_t offset);
 		
@@ -105,7 +108,8 @@ namespace AR
 		
 		size_t _bufferSize;
 		size_t _bufferOffset;
-		size_t _frameBegin;
+		
+		std::vector<std::vector<uint8_t>> _data;
 	};
 }
 

@@ -169,6 +169,9 @@ namespace AR
 		{
 			std::lock_guard<std::recursive_mutex> lock(_lock);
 			
+			for(Service *service : _services)
+				service->Update();
+			
 			if(_freshData)
 			{
 				if(_state == State::Connected)

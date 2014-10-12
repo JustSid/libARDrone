@@ -42,7 +42,7 @@ namespace AR
 	Service::State VideoService::ConnectInternal()
 	{
 		_bufferOffset = 0;
-		_frameBegin   = std::string::npos;
+		SetCanSleep(false);
 		
 		return (_socket->Connect()) ? Service::State::Connected : Service::State::Disconnected;
 	}
@@ -90,55 +90,80 @@ namespace AR
 		return std::string::npos;
 	}
 	
-	void VideoService::HandleFrame(std::vector<uint8_t> &frame)
+	void VideoService::Update()
 	{
-		PAVE *header = reinterpret_cast<PAVE *>(frame.data());
+		{
+			std::vector<std::vector<uint8_t>> data;
+			
+			{
+				std::lock_guard<std::mutex> lock(_mutex);
+				std::swap(data, _data);
+			}
+			
+			for(auto &temp : data)
+			{
+				std::copy(temp.data(), temp.data() + temp.size(), _buffer + _bufferOffset);
+				_bufferOffset += temp.size();
+			}
+		}
 		
-		if(header->control != PAVEControlTypeData)
-			return;
+		// Get all the frames
+		std::vector<size_t> frames;
+		size_t frameBegin = std::string::npos;
 		
-		const uint8_t *data = frame.data() + sizeof(PAVE);
+		while(1)
+		{
+			size_t offset = (frameBegin != std::string::npos) ? frameBegin + 4 : 0;
+			size_t header = FindPaveHeader(offset);
+			
+			if(header != std::string::npos)
+			{
+				if(frameBegin != std::string::npos)
+				{
+					PAVE *pave = reinterpret_cast<PAVE *>(_buffer + frameBegin);
+					
+					if(pave->control == PAVEControlTypeData)
+					{
+						if(pave->frame_type == PAVEFrameTypeIDRFrame || pave->frame_type == PAVEFrameTypeIFrame)
+							frames.clear();
+						
+						frames.push_back(frameBegin);
+					}
+				}
+				
+				frameBegin = header;
+			}
+			else
+				break;
+		}
 		
-		std::lock_guard<std::mutex> lock(_mutex);
-		
-		for(auto &subscriber : _subscribers)
-			subscriber.first(header, data);
+		if(frameBegin != std::string::npos)
+		{
+			for(size_t offset : frames)
+			{
+				PAVE *pave = reinterpret_cast<PAVE *>(_buffer + offset);
+				const uint8_t *data = _buffer + offset + pave->header_size;
+				
+				for(auto &subscriber : _subscribers)
+					subscriber.first(pave, data);
+			}
+			
+			std::copy(_buffer + frameBegin, _buffer + _bufferOffset, _buffer);
+			_bufferOffset = _bufferOffset - frameBegin;
+		}
 	}
 	
 	void VideoService::Tick(uint32_t reason)
 	{
-		while(1)
+		size_t read = 0;
+		std::vector<uint8_t> buffer(1048576);
+		
+		if(_socket->Receive(buffer.data(), buffer.size(), &read) == Socket::Result::Success)
 		{
-			size_t read = 0;
+			buffer.resize(read);
 			
-			if(_socket->Receive(_buffer + _bufferOffset, _bufferSize - _bufferOffset, &read) == Socket::Result::Success)
-			{
-				_bufferOffset += read;
-				
-				size_t offset = (_frameBegin != std::string::npos) ? _frameBegin + 4 : 0;
-				size_t header = FindPaveHeader(offset);
-				
-				if(header != std::string::npos)
-				{
-					if(_frameBegin != std::string::npos)
-					{
-						// Copy the frame
-						std::vector<uint8_t> frame(header - _frameBegin);
-						std::copy(_buffer + _frameBegin, _buffer + header, frame.data());
-						
-						HandleFrame(frame);
-						
-						// Move the frame back in the buffer
-						std::copy(_buffer + header, _buffer + _bufferOffset, _buffer);
-						
-						header        = 0;
-						_bufferOffset = (_bufferOffset - header);
-					}
-					
-					_frameBegin = header;
-					break;
-				}
-			}
+			std::lock_guard<std::mutex> lock(_mutex);
+			_data.push_back(std::move(buffer));
 		}
 	}
 }

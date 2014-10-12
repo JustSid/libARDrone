@@ -100,7 +100,7 @@ namespace AR
 		_droneState = navdata->state;
 		_navdataConsumed = false;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	
@@ -113,7 +113,7 @@ namespace AR
 		
 		_queue.push_back(std::move(command));
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ConfigService::SendConfig(const std::string &key, const std::string &value, std::function<void(bool)> &&callback)
@@ -127,7 +127,7 @@ namespace AR
 		
 		_queue.push_back(std::move(command));
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	std::string &ConfigService::GetConfig(const std::string &key)

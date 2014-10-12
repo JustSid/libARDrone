@@ -73,7 +73,7 @@ namespace AR
 		_queue.push_back(std::move(command.GetCommand(_sequence)));
 		_sequence ++;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ATService::Tick(uint32_t reason)

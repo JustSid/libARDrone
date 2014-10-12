@@ -31,6 +31,8 @@ namespace AR
 	class Service
 	{
 	public:
+		friend class Drone;
+		
 		enum class State
 		{
 			Disconnected,
@@ -41,7 +43,7 @@ namespace AR
 		
 		enum WakeupReason
 		{
-			Update   = (1 << 0),
+			DataAvilable = (1 << 0),
 			Shutdown = (1 << 1)
 		};
 		
@@ -65,6 +67,10 @@ namespace AR
 		virtual State ConnectInternal();
 		virtual void DisconnectInternal();
 		
+		virtual void Update();
+		
+		void SetCanSleep(bool value);
+		
 	private:
 		void ThreadHandler();
 		
@@ -76,9 +82,10 @@ namespace AR
 		std::mutex _mutex;
 		std::condition_variable _signal;
 		std::thread _thread;
-		bool _wakeup;
 		
-		uint32_t _reason;
+		bool _wakeup;
+		std::atomic<bool> _canSleep;
+		std::atomic<uint32_t> _reason;
 	};
 }
 

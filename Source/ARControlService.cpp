@@ -93,7 +93,7 @@ namespace AR
 			TickNow();
 		}
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ControlService::Ftrim()
@@ -101,7 +101,7 @@ namespace AR
 		std::lock_guard<std::mutex> lock(_mutex);
 		_wantsFtrim = true;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ControlService::TakeOff()
@@ -118,7 +118,7 @@ namespace AR
 			_hover = true;
 			
 			TickNow();
-			Wakeup(WakeupReason::Update);
+			Wakeup(WakeupReason::DataAvilable);
 		}
 	}
 	
@@ -129,7 +129,7 @@ namespace AR
 		if(_wantsTakeOff && _flyState == FlyState::Flying)
 		{
 			_wantsTakeOff = false;
-			Wakeup(WakeupReason::Update);
+			Wakeup(WakeupReason::DataAvilable);
 		}
 	}
 	
@@ -140,7 +140,7 @@ namespace AR
 		_direction = Vector3(0.0f);
 		_hover = true;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ControlService::SetEmergency(bool emergency)
@@ -151,7 +151,7 @@ namespace AR
 		if(_emergency)
 			_wantsTakeOff = false;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ControlService::SetDirection(const Vector3 &direction)
@@ -164,7 +164,7 @@ namespace AR
 		if(fabsf(_direction.x) > 0.01 || fabsf(_direction.z) > 0.01)
 			_hover = false;
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	void ControlService::SetAngularSpeed(float speed)
@@ -172,7 +172,7 @@ namespace AR
 		std::lock_guard<std::mutex> lock(_mutex);
 		_angularSpeed = std::max(-1.0f, std::min(speed, 1.0f));
 		
-		Wakeup(WakeupReason::Update);
+		Wakeup(WakeupReason::DataAvilable);
 	}
 	
 	
