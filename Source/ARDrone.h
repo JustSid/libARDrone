@@ -29,6 +29,7 @@
 #include "ARNavdataService.h"
 #include "ARControlService.h"
 #include "ARConfigService.h"
+#include "ARVideoService.h"
 
 namespace AR
 {
