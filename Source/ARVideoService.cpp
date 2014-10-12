@@ -156,7 +156,7 @@ namespace AR
 	void VideoService::Tick(uint32_t reason)
 	{
 		size_t read = 0;
-		std::vector<uint8_t> buffer(1048576);
+		std::vector<uint8_t> buffer(32768);
 		
 		if(_socket->Receive(buffer.data(), buffer.size(), &read) == Socket::Result::Success)
 		{
