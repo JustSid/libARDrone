@@ -100,7 +100,7 @@ namespace AR
 		
 		std::chrono::steady_clock::time_point _lastMessage;
 		
-		std::mutex _lock;
+		std::recursive_mutex _lock;
 		std::vector<std::pair<std::function<void(Navdata *data)>, void *>> _navdataSubscriber;
 		Navdata *_navdata;
 		bool _freshData;

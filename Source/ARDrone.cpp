@@ -47,7 +47,7 @@ namespace AR
 	
 	bool Drone::AddService(Service *service)
 	{
-		std::lock_guard<std::mutex> lock(_lock);
+		std::lock_guard<std::recursive_mutex> lock(_lock);
 		
 		if(_state == State::Disconnected)
 		{
@@ -60,7 +60,7 @@ namespace AR
 	
 	Service *Drone::GetService(const std::string &name)
 	{
-		std::lock_guard<std::mutex> lock(_lock);
+		std::lock_guard<std::recursive_mutex> lock(_lock);
 		for(Service *service : _services)
 		{
 			if(service->GetName() == name)
@@ -167,7 +167,7 @@ namespace AR
 		}
 		
 		{
-			std::lock_guard<std::mutex> lock(_lock);
+			std::lock_guard<std::recursive_mutex> lock(_lock);
 			
 			if(_freshData)
 			{
@@ -203,13 +203,13 @@ namespace AR
 	
 	void Drone::AddNavdataSubscriber(std::function<void (Navdata *)> &&function, void *token)
 	{
-		std::lock_guard<std::mutex> lock(_lock);
+		std::lock_guard<std::recursive_mutex> lock(_lock);
 		_navdataSubscriber.push_back(std::make_pair(std::move(function), token));
 	}
 	
 	void Drone::RemoveNavdataSubscriber(void *token)
 	{
-		std::lock_guard<std::mutex> lock(_lock);
+		std::lock_guard<std::recursive_mutex> lock(_lock);
 		
 		for(auto i = _navdataSubscriber.begin(); i != _navdataSubscriber.end(); i ++)
 		{
@@ -233,7 +233,7 @@ namespace AR
 			}
 		}
 		
-		std::lock_guard<std::mutex> lock(_lock);
+		std::lock_guard<std::recursive_mutex> lock(_lock);
 		delete _navdata;
 		
 		_navdata   = data;
