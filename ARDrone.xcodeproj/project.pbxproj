@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E9A963EF19EACE6500CBE6F6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963EE19EACE6500CBE6F6 /* main.cpp */; };
+		E9A9640619EAD01D00CBE6F6 /* ARATService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963F719EAD01D00CBE6F6 /* ARATService.cpp */; };
+		E9A9640719EAD01D00CBE6F6 /* ARATService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A963F819EAD01D00CBE6F6 /* ARATService.h */; };
+		E9A9640819EAD01D00CBE6F6 /* ARConfigService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963F919EAD01D00CBE6F6 /* ARConfigService.cpp */; };
+		E9A9640919EAD01D00CBE6F6 /* ARConfigService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A963FA19EAD01D00CBE6F6 /* ARConfigService.h */; };
+		E9A9640A19EAD01D00CBE6F6 /* ARControlService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963FB19EAD01D00CBE6F6 /* ARControlService.cpp */; };
+		E9A9640B19EAD01D00CBE6F6 /* ARControlService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A963FC19EAD01D00CBE6F6 /* ARControlService.h */; };
+		E9A9640C19EAD01D00CBE6F6 /* ARDrone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963FD19EAD01D00CBE6F6 /* ARDrone.cpp */; };
+		E9A9640D19EAD01D00CBE6F6 /* ARDrone.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A963FE19EAD01D00CBE6F6 /* ARDrone.h */; };
+		E9A9640E19EAD01D00CBE6F6 /* ARNavdataService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963FF19EAD01D00CBE6F6 /* ARNavdataService.cpp */; };
+		E9A9640F19EAD01D00CBE6F6 /* ARNavdataService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A9640019EAD01D00CBE6F6 /* ARNavdataService.h */; };
+		E9A9641019EAD01D00CBE6F6 /* ARService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A9640119EAD01D00CBE6F6 /* ARService.cpp */; };
+		E9A9641119EAD01D00CBE6F6 /* ARService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A9640219EAD01D00CBE6F6 /* ARService.h */; };
+		E9A9641219EAD01D00CBE6F6 /* ARSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A9640319EAD01D00CBE6F6 /* ARSocket.cpp */; };
+		E9A9641319EAD01D00CBE6F6 /* ARSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A9640419EAD01D00CBE6F6 /* ARSocket.h */; };
+		E9A9641419EAD01D00CBE6F6 /* ARVector.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A9640519EAD01D00CBE6F6 /* ARVector.h */; };
+		E9A9641519EAD04000CBE6F6 /* libARDrone.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E9A9641619EAD04600CBE6F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9A963B419EACE2E00CBE6F6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E9A963BB19EACE2E00CBE6F6;
+			remoteInfo = ARDrone;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9A963EA19EACE6500CBE6F6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libARDrone.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A963EC19EACE6500CBE6F6 /* Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Example; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9A963EE19EACE6500CBE6F6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E9A963F719EAD01D00CBE6F6 /* ARATService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARATService.cpp; sourceTree = "<group>"; };
+		E9A963F819EAD01D00CBE6F6 /* ARATService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARATService.h; sourceTree = "<group>"; };
+		E9A963F919EAD01D00CBE6F6 /* ARConfigService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARConfigService.cpp; sourceTree = "<group>"; };
+		E9A963FA19EAD01D00CBE6F6 /* ARConfigService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARConfigService.h; sourceTree = "<group>"; };
+		E9A963FB19EAD01D00CBE6F6 /* ARControlService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARControlService.cpp; sourceTree = "<group>"; };
+		E9A963FC19EAD01D00CBE6F6 /* ARControlService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARControlService.h; sourceTree = "<group>"; };
+		E9A963FD19EAD01D00CBE6F6 /* ARDrone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARDrone.cpp; sourceTree = "<group>"; };
+		E9A963FE19EAD01D00CBE6F6 /* ARDrone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDrone.h; sourceTree = "<group>"; };
+		E9A963FF19EAD01D00CBE6F6 /* ARNavdataService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARNavdataService.cpp; sourceTree = "<group>"; };
+		E9A9640019EAD01D00CBE6F6 /* ARNavdataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARNavdataService.h; sourceTree = "<group>"; };
+		E9A9640119EAD01D00CBE6F6 /* ARService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARService.cpp; sourceTree = "<group>"; };
+		E9A9640219EAD01D00CBE6F6 /* ARService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARService.h; sourceTree = "<group>"; };
+		E9A9640319EAD01D00CBE6F6 /* ARSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARSocket.cpp; sourceTree = "<group>"; };
+		E9A9640419EAD01D00CBE6F6 /* ARSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSocket.h; sourceTree = "<group>"; };
+		E9A9640519EAD01D00CBE6F6 /* ARVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVector.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E9A963B919EACE2E00CBE6F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9A963E919EACE6500CBE6F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A9641519EAD04000CBE6F6 /* libARDrone.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E9A963B319EACE2E00CBE6F6 = {
+			isa = PBXGroup;
+			children = (
+				E9A963F619EAD01D00CBE6F6 /* Source */,
+				E9A963ED19EACE6500CBE6F6 /* Example */,
+				E9A963BD19EACE2E00CBE6F6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E9A963BD19EACE2E00CBE6F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */,
+				E9A963EC19EACE6500CBE6F6 /* Example */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E9A963ED19EACE6500CBE6F6 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				E9A963EE19EACE6500CBE6F6 /* main.cpp */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+		E9A963F619EAD01D00CBE6F6 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				E9A963F719EAD01D00CBE6F6 /* ARATService.cpp */,
+				E9A963F819EAD01D00CBE6F6 /* ARATService.h */,
+				E9A963F919EAD01D00CBE6F6 /* ARConfigService.cpp */,
+				E9A963FA19EAD01D00CBE6F6 /* ARConfigService.h */,
+				E9A963FB19EAD01D00CBE6F6 /* ARControlService.cpp */,
+				E9A963FC19EAD01D00CBE6F6 /* ARControlService.h */,
+				E9A963FD19EAD01D00CBE6F6 /* ARDrone.cpp */,
+				E9A963FE19EAD01D00CBE6F6 /* ARDrone.h */,
+				E9A963FF19EAD01D00CBE6F6 /* ARNavdataService.cpp */,
+				E9A9640019EAD01D00CBE6F6 /* ARNavdataService.h */,
+				E9A9640119EAD01D00CBE6F6 /* ARService.cpp */,
+				E9A9640219EAD01D00CBE6F6 /* ARService.h */,
+				E9A9640319EAD01D00CBE6F6 /* ARSocket.cpp */,
+				E9A9640419EAD01D00CBE6F6 /* ARSocket.h */,
+				E9A9640519EAD01D00CBE6F6 /* ARVector.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E9A963BA19EACE2E00CBE6F6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A9640B19EAD01D00CBE6F6 /* ARControlService.h in Headers */,
+				E9A9640719EAD01D00CBE6F6 /* ARATService.h in Headers */,
+				E9A9641319EAD01D00CBE6F6 /* ARSocket.h in Headers */,
+				E9A9640D19EAD01D00CBE6F6 /* ARDrone.h in Headers */,
+				E9A9640F19EAD01D00CBE6F6 /* ARNavdataService.h in Headers */,
+				E9A9640919EAD01D00CBE6F6 /* ARConfigService.h in Headers */,
+				E9A9641419EAD01D00CBE6F6 /* ARVector.h in Headers */,
+				E9A9641119EAD01D00CBE6F6 /* ARService.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E9A963BB19EACE2E00CBE6F6 /* ARDrone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9A963C719EACE2E00CBE6F6 /* Build configuration list for PBXNativeTarget "ARDrone" */;
+			buildPhases = (
+				E9A963B819EACE2E00CBE6F6 /* Sources */,
+				E9A963B919EACE2E00CBE6F6 /* Frameworks */,
+				E9A963BA19EACE2E00CBE6F6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARDrone;
+			productName = ARDrone;
+			productReference = E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		E9A963EB19EACE6500CBE6F6 /* Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E9A963F019EACE6500CBE6F6 /* Build configuration list for PBXNativeTarget "Example" */;
+			buildPhases = (
+				E9A963E819EACE6500CBE6F6 /* Sources */,
+				E9A963E919EACE6500CBE6F6 /* Frameworks */,
+				E9A963EA19EACE6500CBE6F6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E9A9641719EAD04600CBE6F6 /* PBXTargetDependency */,
+			);
+			name = Example;
+			productName = Example;
+			productReference = E9A963EC19EACE6500CBE6F6 /* Example */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E9A963B419EACE2E00CBE6F6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Sidney Just";
+				TargetAttributes = {
+					E9A963BB19EACE2E00CBE6F6 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					E9A963EB19EACE6500CBE6F6 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = E9A963B719EACE2E00CBE6F6 /* Build configuration list for PBXProject "ARDrone" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E9A963B319EACE2E00CBE6F6;
+			productRefGroup = E9A963BD19EACE2E00CBE6F6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E9A963BB19EACE2E00CBE6F6 /* ARDrone */,
+				E9A963EB19EACE6500CBE6F6 /* Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E9A963B819EACE2E00CBE6F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A9640A19EAD01D00CBE6F6 /* ARControlService.cpp in Sources */,
+				E9A9641219EAD01D00CBE6F6 /* ARSocket.cpp in Sources */,
+				E9A9640819EAD01D00CBE6F6 /* ARConfigService.cpp in Sources */,
+				E9A9641019EAD01D00CBE6F6 /* ARService.cpp in Sources */,
+				E9A9640619EAD01D00CBE6F6 /* ARATService.cpp in Sources */,
+				E9A9640C19EAD01D00CBE6F6 /* ARDrone.cpp in Sources */,
+				E9A9640E19EAD01D00CBE6F6 /* ARNavdataService.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E9A963E819EACE6500CBE6F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E9A963EF19EACE6500CBE6F6 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E9A9641719EAD04600CBE6F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E9A963BB19EACE2E00CBE6F6 /* ARDrone */;
+			targetProxy = E9A9641619EAD04600CBE6F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E9A963C519EACE2E00CBE6F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E9A963C619EACE2E00CBE6F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E9A963C819EACE2E00CBE6F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E9A963C919EACE2E00CBE6F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E9A963F119EACE6500CBE6F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E9A963F219EACE6500CBE6F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E9A963B719EACE2E00CBE6F6 /* Build configuration list for PBXProject "ARDrone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A963C519EACE2E00CBE6F6 /* Debug */,
+				E9A963C619EACE2E00CBE6F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9A963C719EACE2E00CBE6F6 /* Build configuration list for PBXNativeTarget "ARDrone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A963C819EACE2E00CBE6F6 /* Debug */,
+				E9A963C919EACE2E00CBE6F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E9A963F019EACE6500CBE6F6 /* Build configuration list for PBXNativeTarget "Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A963F119EACE6500CBE6F6 /* Debug */,
+				E9A963F219EACE6500CBE6F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E9A963B419EACE2E00CBE6F6 /* Project object */;
+}
