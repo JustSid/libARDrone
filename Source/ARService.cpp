@@ -128,7 +128,7 @@ namespace AR
 				return;
 			
 			Tick(_reason);
-			_reason = 0;
+			_reason &= ~WakeupReason::DataAvilable;
 		}
 	}
 }
