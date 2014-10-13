@@ -137,6 +137,12 @@ namespace AR
 						break;
 					}
 						
+					case 27:
+					{
+						NavdataOptionGPS *data = static_cast<NavdataOptionGPS *>(option);
+						navdata->options.emplace_back(new NavdataOptionGPS(*data));
+					}
+						
 					default:
 						break;
 				}

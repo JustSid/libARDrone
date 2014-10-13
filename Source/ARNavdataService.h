@@ -117,6 +117,61 @@ namespace AR
 		int32_t   alt_temp_raw;
 		int16_t   gradient;
 	} __attribute__((packed));
+
+	struct NavdataOptionGPS : public NavdataOption
+	{
+		double latitude;
+		double longitude;
+		double elevation;
+		double hdop;
+		uint32_t data_available;
+		int32_t zero_validated;
+		int32_t wpt_validated;
+		double lat0;
+		double long0;
+		double lat_fused;
+		double long_fused;
+
+		uint32_t gps_state;
+
+		float X_traj;
+		float X_ref;
+		float Y_traj;
+		float Y_ref;
+
+		float theta_p;
+		float phi_p;
+		float theta_i;
+		float phi_i;
+		float theta_d;
+		float phi_d;
+
+		float vdop;
+		float pdop;
+
+		float speed;
+		uint32_t lastFrameTimestamp;
+		float degree;
+		float degree_magnetic;
+		float ehpe;
+		float ehve;
+
+		float c_n0;  /* Signal to noise ratio (average of the four best satellites) */
+		uint32_t nbsat; /* Number of acquired satellites */
+		struct
+		{
+			uint8_t sat; /* Satellite ID */
+			uint8_t c_n0; /* Satellite C/N0 */
+		}channels[12];
+	
+		int32_t is_gps_plugged;
+		uint32_t ephemerisStatus;
+
+		float vx_traj;
+		float vy_traj;
+
+		uint32_t firmwareStatus;
+	} __attribute__ ((packed));
 	
 	struct Navdata
 	{
