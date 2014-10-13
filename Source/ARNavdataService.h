@@ -146,8 +146,8 @@ namespace AR
 		float theta_d;
 		float phi_d;
 
-		float vdop;
-		float pdop;
+		double vdop;
+		double pdop;
 
 		float speed;
 		uint32_t lastFrameTimestamp;
