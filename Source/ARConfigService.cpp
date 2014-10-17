@@ -116,6 +116,20 @@ namespace AR
 		Wakeup(WakeupReason::DataAvilable);
 	}
 	
+	void ConfigService::SendConfig(const std::string &key, bool value, std::function<void(bool)> &&callback)
+	{
+		std::string strvalue = value ? "TRUE" : "FALSE";
+		SendConfig(key, strvalue, std::move(callback));
+	}
+	
+	void ConfigService::SendConfig(const std::string &key, uint32_t value, std::function<void(bool)> &&callback)
+	{
+		std::stringstream stream;
+		stream << value;
+		
+		SendConfig(key, stream.str(), std::move(callback));
+	}
+	
 	void ConfigService::SendConfig(const std::string &key, const std::string &value, std::function<void(bool)> &&callback)
 	{
 		std::lock_guard<std::mutex> lock(_mutex);

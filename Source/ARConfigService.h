@@ -42,6 +42,9 @@ namespace AR
 		~ConfigService() override;
 		
 		void FetchConfig(std::function<void(bool)> &&callback);
+		
+		void SendConfig(const std::string &key, bool value, std::function<void(bool)> &&callback);
+		void SendConfig(const std::string &key, uint32_t value, std::function<void(bool)> &&callback);
 		void SendConfig(const std::string &key, const std::string &value, std::function<void(bool)> &&callback);
 		std::string &GetConfig(const std::string &key);
 		
