@@ -51,6 +51,8 @@ namespace AR
 		bool IsHovering();
 		
 		void Ftrim();
+		void Calibrate();
+		
 		void TakeOff();
 		void Land();
 		void Hover();
@@ -80,6 +82,7 @@ namespace AR
 		bool _hasNavdata;
 		bool _wantsTakeOff;
 		bool _wantsFtrim;
+		bool _wantsCalibration;
 		bool _emergency;
 		
 		FlyState _flyState;

@@ -26,6 +26,7 @@ namespace AR
 		_wantsTakeOff(false),
 		_emergency(false),
 		_wantsFtrim(false),
+		_wantsCalibration(false),
 		_hasNavdata(false),
 		_hover(true),
 		_flyState(FlyState::Landed)
@@ -100,6 +101,14 @@ namespace AR
 	{
 		std::lock_guard<std::mutex> lock(_mutex);
 		_wantsFtrim = true;
+		
+		Wakeup(WakeupReason::DataAvilable);
+	}
+	
+	void ControlService::Calibrate()
+	{
+		std::lock_guard<std::mutex> lock(_mutex);
+		_wantsCalibration = true;
 		
 		Wakeup(WakeupReason::DataAvilable);
 	}
@@ -254,6 +263,11 @@ namespace AR
 			_wantsFtrim = false;
 		}
 		
+		if(_wantsCalibration && _flyState == FlyState::Flying)
+		{
+			_atService->Send(ATCommand("CALIB") << 0);
+			_wantsCalibration = false;
+		}
 		
 		auto now = std::chrono::steady_clock::now();
 		auto time = std::chrono::duration_cast<std::chrono::milliseconds>(now - _lastPackage).count();

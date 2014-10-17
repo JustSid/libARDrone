@@ -151,6 +151,13 @@ namespace AR
 						break;
 					}
 						
+					case NavdataTag::Magneto:
+					{
+						NavdataOptionMagneto *data = static_cast<NavdataOptionMagneto *>(option);
+						navdata->options.emplace_back(new NavdataOptionMagneto(*data));
+						break;
+					}
+						
 					case NavdataTag::GPS:
 					{
 						NavdataOptionGPS *data = static_cast<NavdataOptionGPS *>(option);

@@ -28,6 +28,7 @@
 
 #include "ARService.h"
 #include "ARSocket.h"
+#include "ARVector.h"
 
 namespace AR
 {
@@ -163,6 +164,24 @@ namespace AR
 		int32_t   alt_temp_raw;
 		int16_t   gradient;
 	} __attribute__((packed));
+	
+	struct NavdataOptionMagneto : public NavdataOption
+	{
+		int16_t mx;
+		int16_t my;
+		int16_t mz;
+		Vector3 magneto_raw;       // magneto in the body frame, in mG
+		Vector3 magneto_rectified;
+		Vector3 magneto_offset;
+		float heading_unwrapped;
+		float heading_gyro_unwrapped;
+		float heading_fusion_unwrapped;
+		char magneto_calibration_ok;
+		uint32_t magneto_state;
+		float magneto_radius;
+		float error_mean;
+		float error_var;
+	} __attribute__((packed));
 
 	struct NavdataOptionGPS : public NavdataOption
 	{
@@ -242,6 +261,58 @@ namespace AR
 			}
 			
 			return nullptr;
+		}
+		
+		Navdata *CopyWithTags(uint32_t tags)
+		{
+			Navdata *copy = new Navdata();
+			copy->state = state;
+			copy->sequence = sequence;
+			copy->vision = vision;
+			
+			for(auto &temp : options)
+			{
+				NavdataOption *option = static_cast<NavdataOption *>(temp.get());
+				
+				if(!(tags & (UINT32_C(1) << static_cast<uint32_t>(option->tag))))
+					continue;
+				
+				switch(option->tag)
+				{
+					case NavdataTag::Demo:
+					{
+						NavdataOptionDemo *data = static_cast<NavdataOptionDemo *>(option);
+						copy->options.emplace_back(new NavdataOptionDemo(*data));
+						break;
+					}
+						
+					case NavdataTag::RawMeasures:
+					{
+						NavdataOptionRawMeasures *data = static_cast<NavdataOptionRawMeasures *>(option);
+						copy->options.emplace_back(new NavdataOptionRawMeasures(*data));
+						break;
+					}
+						
+					case NavdataTag::Magneto:
+					{
+						NavdataOptionMagneto *data = static_cast<NavdataOptionMagneto *>(option);
+						copy->options.emplace_back(new NavdataOptionMagneto(*data));
+						break;
+					}
+						
+					case NavdataTag::GPS:
+					{
+						NavdataOptionGPS *data = static_cast<NavdataOptionGPS *>(option);
+						copy->options.emplace_back(new NavdataOptionGPS(*data));
+						break;
+					}
+					
+					default:
+						break;
+				}
+			}
+			
+			return copy;
 		}
 		
 		std::vector<std::unique_ptr<NavdataOption>> options;

@@ -30,6 +30,7 @@
 #include "ARControlService.h"
 #include "ARConfigService.h"
 #include "ARVideoService.h"
+#include "ARAutonomousService.h"
 
 namespace AR
 {

@@ -19,7 +19,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <strings.h>
-#include <arpa/inet.h>
 #include "ARSocket.h"
 
 namespace AR

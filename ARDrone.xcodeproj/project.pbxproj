@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E91654A119EAE29C00E11BE4 /* ARVideoService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E916549F19EAE29C00E11BE4 /* ARVideoService.cpp */; };
 		E91654A219EAE29C00E11BE4 /* ARVideoService.h in Headers */ = {isa = PBXBuildFile; fileRef = E91654A019EAE29C00E11BE4 /* ARVideoService.h */; };
+		E9304AF419F0A42C008F0983 /* ARAutonomousService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9304AF219F0A42C008F0983 /* ARAutonomousService.cpp */; };
+		E9304AF519F0A42C008F0983 /* ARAutonomousService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9304AF319F0A42C008F0983 /* ARAutonomousService.h */; };
 		E9A963EF19EACE6500CBE6F6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963EE19EACE6500CBE6F6 /* main.cpp */; };
 		E9A9640619EAD01D00CBE6F6 /* ARATService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9A963F719EAD01D00CBE6F6 /* ARATService.cpp */; };
 		E9A9640719EAD01D00CBE6F6 /* ARATService.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A963F819EAD01D00CBE6F6 /* ARATService.h */; };
@@ -53,6 +55,9 @@
 /* Begin PBXFileReference section */
 		E916549F19EAE29C00E11BE4 /* ARVideoService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARVideoService.cpp; sourceTree = "<group>"; };
 		E91654A019EAE29C00E11BE4 /* ARVideoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARVideoService.h; sourceTree = "<group>"; };
+		E9304AF219F0A42C008F0983 /* ARAutonomousService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARAutonomousService.cpp; sourceTree = "<group>"; };
+		E9304AF319F0A42C008F0983 /* ARAutonomousService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAutonomousService.h; sourceTree = "<group>"; };
+		E9304AF619F0A621008F0983 /* ARLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARLocation.h; sourceTree = "<group>"; };
 		E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libARDrone.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A963EC19EACE6500CBE6F6 /* Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Example; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A963EE19EACE6500CBE6F6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -123,6 +128,8 @@
 			children = (
 				E9A963F719EAD01D00CBE6F6 /* ARATService.cpp */,
 				E9A963F819EAD01D00CBE6F6 /* ARATService.h */,
+				E9304AF219F0A42C008F0983 /* ARAutonomousService.cpp */,
+				E9304AF319F0A42C008F0983 /* ARAutonomousService.h */,
 				E9A963F919EAD01D00CBE6F6 /* ARConfigService.cpp */,
 				E9A963FA19EAD01D00CBE6F6 /* ARConfigService.h */,
 				E9A963FB19EAD01D00CBE6F6 /* ARControlService.cpp */,
@@ -138,6 +145,7 @@
 				E9A9640519EAD01D00CBE6F6 /* ARVector.h */,
 				E916549F19EAE29C00E11BE4 /* ARVideoService.cpp */,
 				E91654A019EAE29C00E11BE4 /* ARVideoService.h */,
+				E9304AF619F0A621008F0983 /* ARLocation.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9A9640B19EAD01D00CBE6F6 /* ARControlService.h in Headers */,
+				E9304AF519F0A42C008F0983 /* ARAutonomousService.h in Headers */,
 				E91654A219EAE29C00E11BE4 /* ARVideoService.h in Headers */,
 				E9A9640719EAD01D00CBE6F6 /* ARATService.h in Headers */,
 				E9A9641319EAD01D00CBE6F6 /* ARSocket.h in Headers */,
@@ -245,6 +254,7 @@
 				E9A9641019EAD01D00CBE6F6 /* ARService.cpp in Sources */,
 				E9A9640619EAD01D00CBE6F6 /* ARATService.cpp in Sources */,
 				E9A9640C19EAD01D00CBE6F6 /* ARDrone.cpp in Sources */,
+				E9304AF419F0A42C008F0983 /* ARAutonomousService.cpp in Sources */,
 				E91654A119EAE29C00E11BE4 /* ARVideoService.cpp in Sources */,
 				E9A9640E19EAD01D00CBE6F6 /* ARNavdataService.cpp in Sources */,
 			);
