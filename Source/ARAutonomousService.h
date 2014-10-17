@@ -20,6 +20,7 @@
 #define __libARDrone__ARAutonomousService__
 
 #include <chrono>
+#include <list>
 #include "ARService.h"
 #include "ARNavdataService.h"
 #include "ARATService.h"
@@ -48,7 +49,8 @@ namespace AR
 		void Start();
 		void Stop();
 		
-		void AddWaypoint(const Location &location, float direction, uint32_t altitude);
+		void AddWaypointCommand(const Location &location, uint32_t altitude);
+		//void AddAltitudeCommand(uint32_t altitude);
 		
 		AutonomyState GetAutonomyState() const { return _state; }
 	
@@ -57,9 +59,6 @@ namespace AR
 		void Tick(uint32_t reason) override;
 		
 	private:
-		void ConsumeNavdata(Navdata *navhdata);
-		void SetCooldown(std::chrono::milliseconds duration);
-		
 		struct Command
 		{
 			enum class Type
@@ -69,15 +68,44 @@ namespace AR
 				Land
 			};
 			
+			Command(Type ttype) :
+				type(ttype)
+			{}
+			
+			template<class T, class ...Args>
+			T *InitializeData(Args&&... args)
+			{
+				T *value = new T(std::forward<Args>(args)...);
+				data = reinterpret_cast<void *>(value);
+				
+				return value;
+			}
+			
+			Type type;
 			void *data;
 		};
 		
 		struct Waypoint
 		{
+			Waypoint(Location tlocation, uint32_t taltitude) :
+				target(tlocation),
+				altitude(taltitude)
+			{}
+			
 			Location target;
-			float direction;
 			uint32_t altitude;
 		};
+		
+		struct Wait
+		{
+			std::chrono::milliseconds duration;
+			std::chrono::steady_clock::time_point temp;
+		};
+		
+		void ConsumeNavdata(Navdata *navhdata);
+		void SetCooldown(std::chrono::milliseconds duration);
+		bool ExecuteCommand(const Command &command);
+		bool ExecuteMoveToCommand(const Command &command, Waypoint *waypoint);
 		
 		ControlService *_control;
 		ATService *_atService;
@@ -90,9 +118,13 @@ namespace AR
 		bool _isFlying;
 		bool _isCalibrated;
 		bool _isTrimmed;
+		bool _needsCalibration;
 		
 		Navdata *_navdata;
 		bool _freshNavdata;
+		
+		std::list<Command> _commands;
+		std::list<Command>::iterator _iterator;
 		
 		std::chrono::steady_clock::time_point _cooldown;
 	};
