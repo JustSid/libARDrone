@@ -81,8 +81,9 @@ namespace AR
 		
 		_needsNavdataOptionsUpdate = true;
 		_options = 0;
+		_navdataOptions = NavdataTagOptions(NavdataTag::Demo);
 		
-		_demoFlag   = false;
+		_demoFlag = false;
 		
 		_atService->Connect();
 		_navdataService->Connect();
@@ -174,7 +175,7 @@ namespace AR
 			
 			if(_needsNavdataOptionsUpdate)
 			{
-				uint32_t options = NavdataTagOptions(NavdataTag::Demo);
+				uint32_t options = _navdataOptions;
 				
 				for(Service *service : _services)
 					options |= service->GetNavdataOptions();
@@ -243,6 +244,13 @@ namespace AR
 		}
 	}
 	
+	
+	void Drone::AddNavdataOptions(uint32_t options)
+	{
+		std::lock_guard<std::recursive_mutex> lock(_lock);
+		_needsNavdataOptionsUpdate = true;
+		_navdataOptions = options;
+	}
 	
 	void Drone::SetNeedsNavdataOptionsUpdate()
 	{
