@@ -18,6 +18,7 @@
 
 #include <assert.h>
 #include "ARService.h"
+#include "ARDrone.h"
 
 namespace AR
 {
@@ -27,7 +28,8 @@ namespace AR
 		_state(State::Disconnected),
 		_wakeup(false),
 		_name(name),
-		_canSleep(true)
+		_canSleep(true),
+		_navdataOptions(0)
 	{}
 	
 	Service::~Service()
@@ -87,6 +89,11 @@ namespace AR
 	}
 	
 	
+	void Service::UpdateNavdataOptions(uint32_t options)
+	{
+		_navdataOptions = options;
+		_drone->SetNeedsNavdataOptionsUpdate();
+	}
 	
 	void Service::SetState(State state)
 	{

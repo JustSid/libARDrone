@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
 	drone->AddService<AR::ControlService>();
 	drone->AddNavdataSubscriber([](AR::Navdata *navdata) {
 		
-		AR::NavdataOptionDemo *demo = navdata->GetOptionWithTag<AR::NavdataOptionDemo>(0);
+		AR::NavdataOptionDemo *demo = navdata->GetOptionWithTag<AR::NavdataOptionDemo>(AR::NavdataTag::Demo);
 		if(demo)
 			std::cout << "Battery: " << demo->vbat_flying_percentage << std::endl;
 		

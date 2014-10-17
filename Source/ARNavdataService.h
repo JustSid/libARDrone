@@ -77,9 +77,55 @@ namespace AR
 		ControlStateLooping
 	} ControlState;
 	
+	enum class NavdataTag : uint16_t
+	{
+		Demo = 0,
+		Time = 1,
+		RawMeasures = 2,
+		PhysMeasures = 3,
+		GyrosOffset = 4,
+		EulerAngles = 5,
+		References = 6,
+		Trims = 7,
+		RCReferences = 8,
+		PWM = 9,
+		Altitude = 10,
+		VisionRaw = 11,
+		VisionOF = 12,
+		Vision = 13,
+		VisionPerf = 14,
+		TrackersSend = 15,
+		VisionDetect = 16,
+		Watchdog = 17,
+		ADCDataFrame = 18,
+		VideoStream = 19,
+		Game = 20,
+		PressureRaw = 21,
+		Magneto = 22,
+		Wind = 23,
+		KalmanPressure = 24,
+		HDVideoStream = 25,
+		Wifi = 26,
+		GPS = 27,
+		
+		Checksum = UINT16_MAX
+	};
+	
+	template<class ...Args>
+	uint32_t NavdataTagOptions(Args... args)
+	{
+		std::initializer_list<uint32_t> list { static_cast<uint32_t>(args)... };
+		uint32_t result = 0;
+		
+		for(uint32_t val : list)
+			result |= (UINT32_C(1) << val);
+		
+		return result;
+	}
+	
 	struct NavdataOption
 	{
-		uint16_t tag;
+		NavdataTag tag;
 		uint16_t size;
 	} __attribute__((packed));
 	
@@ -173,6 +219,13 @@ namespace AR
 		uint32_t firmwareStatus;
 	} __attribute__ ((packed));
 	
+	struct NavdataOptionChecksum : public NavdataOption
+	{
+		uint32_t checksum;
+	} __attribute__((packed));
+	
+	
+	
 	struct Navdata
 	{
 		uint32_t state;
@@ -180,7 +233,7 @@ namespace AR
 		uint32_t vision;
 		
 		template<class T>
-		T *GetOptionWithTag(uint16_t tag)
+		T *GetOptionWithTag(NavdataTag tag)
 		{
 			for(std::unique_ptr<NavdataOption> &option : options)
 			{
@@ -208,6 +261,7 @@ namespace AR
 		
 	private:
 		void Open();
+		uint32_t CalculateChecksum(const uint8_t *data, size_t size) const;
 		
 		Socket *_socket;
 		

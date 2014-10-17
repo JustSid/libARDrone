@@ -79,6 +79,9 @@ namespace AR
 		_state       = State::Connecting;
 		_lastMessage = std::chrono::steady_clock::now();
 		
+		_needsNavdataOptionsUpdate = true;
+		_options = 0;
+		
 		_demoFlag   = false;
 		
 		_atService->Connect();
@@ -169,6 +172,22 @@ namespace AR
 		{
 			std::lock_guard<std::recursive_mutex> lock(_lock);
 			
+			if(_needsNavdataOptionsUpdate)
+			{
+				uint32_t options = NavdataTagOptions(NavdataTag::Demo);
+				
+				for(Service *service : _services)
+					options |= service->GetNavdataOptions();
+				
+				if(options != _options)
+				{
+					_configService->SendConfig("general:navdata_options", options, nullptr);
+					_options = options;
+				}
+				
+				_needsNavdataOptionsUpdate = false;
+			}
+			
 			for(Service *service : _services)
 				service->Update();
 			
@@ -225,13 +244,28 @@ namespace AR
 	}
 	
 	
+	void Drone::SetNeedsNavdataOptionsUpdate()
+	{
+		std::lock_guard<std::recursive_mutex> lock(_lock);
+		_needsNavdataOptionsUpdate = true;
+	}
+	
 	void Drone::PublishNavdata(Navdata *data)
 	{
 		if(_state == State::Connecting)
 		{
+			std::atomic_signal_fence(std::memory_order_acquire); // Might actually be better to make _demoFlag atomic...
+			
 			if(data->state & ARDRONE_NAVDATA_BOOTSTRAP && !_demoFlag)
 			{
-				_configService->SendConfig("general:navdata_demo", "TRUE", nullptr);
+				_configService->SendConfig("general:navdata_demo", true, [=](bool result) {
+					if(!result)
+					{
+						_demoFlag = false;
+						std::atomic_signal_fence(std::memory_order_release);
+					}
+				});
+				
 				_demoFlag = true;
 			}
 		}

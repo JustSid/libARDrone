@@ -55,7 +55,7 @@ namespace AR
 	{
 		std::lock_guard<std::mutex> lock(_mutex);
 		
-		NavdataOptionDemo *options = data->GetOptionWithTag<NavdataOptionDemo>(0);
+		NavdataOptionDemo *options = data->GetOptionWithTag<NavdataOptionDemo>(NavdataTag::Demo);
 		if(options)
 		{
 			_droneState = options->ctrl_state;

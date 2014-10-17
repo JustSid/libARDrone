@@ -65,6 +65,18 @@ namespace AR
 		_sequence = 0;
 	}
 	
+	uint32_t NavdataService::CalculateChecksum(const uint8_t *data, size_t size) const
+	{
+		uint32_t checksum = 0;
+		
+		for(size_t i = 0; i < size; i ++)
+		{
+			checksum += data[i];
+		}
+		
+		return checksum;
+	}
+	
 	void NavdataService::Tick(uint32_t reason)
 	{
 		union
@@ -117,30 +129,44 @@ namespace AR
 			uint8_t *temp = x.buffer + sizeof(__NavdataRaw);
 			size_t left   = received - sizeof(__NavdataRaw);
 			
+			bool checksumVerified = false;
+			
 			while(left > sizeof(NavdataOption))
 			{
 				NavdataOption *option = reinterpret_cast<NavdataOption *>(temp);
 				
 				switch(option->tag)
 				{
-					case 0:
+					case NavdataTag::Demo:
 					{
 						NavdataOptionDemo *data = static_cast<NavdataOptionDemo *>(option);
 						navdata->options.emplace_back(new NavdataOptionDemo(*data));
 						break;
 					}
 						
-					case 2:
+					case NavdataTag::RawMeasures:
 					{
 						NavdataOptionRawMeasures *data = static_cast<NavdataOptionRawMeasures *>(option);
 						navdata->options.emplace_back(new NavdataOptionRawMeasures(*data));
 						break;
 					}
 						
-					case 27:
+					case NavdataTag::GPS:
 					{
 						NavdataOptionGPS *data = static_cast<NavdataOptionGPS *>(option);
 						navdata->options.emplace_back(new NavdataOptionGPS(*data));
+						break;
+					}
+						
+					case NavdataTag::Checksum:
+					{
+						NavdataOptionChecksum *data = static_cast<NavdataOptionChecksum *>(option);
+						navdata->options.emplace_back(new NavdataOptionChecksum(*data));
+						
+						uint32_t checksum = CalculateChecksum(x.buffer, received - sizeof(NavdataOptionChecksum));
+						
+						if(checksum == data->checksum)
+							checksumVerified = true;
 					}
 						
 					default:
@@ -149,6 +175,12 @@ namespace AR
 				
 				temp += option->size;
 				left -= option->size;
+			}
+			
+			if(!checksumVerified)
+			{
+				std::cout << "Checksum verification failed" << std::endl;
+				return;
 			}
 			
 			GetDrone()->PublishNavdata(navdata);

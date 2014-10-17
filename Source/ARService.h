@@ -57,6 +57,7 @@ namespace AR
 		
 		State GetState() const { return _state.load(); }
 		const std::string &GetName() const { return _name; }
+		uint32_t GetNavdataOptions() const { return _navdataOptions; }
 		
 	protected:
 		void SetState(State state);
@@ -70,6 +71,7 @@ namespace AR
 		virtual void Update();
 		
 		void SetCanSleep(bool value);
+		void UpdateNavdataOptions(uint32_t options);
 		
 	private:
 		void ThreadHandler();
@@ -86,6 +88,8 @@ namespace AR
 		bool _wakeup;
 		std::atomic<bool> _canSleep;
 		std::atomic<uint32_t> _reason;
+		
+		std::atomic<uint32_t> _navdataOptions;
 	};
 }
 

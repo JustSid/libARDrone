@@ -36,6 +36,7 @@ namespace AR
 	class Drone
 	{
 	public:
+		friend class Service;
 		friend class NavdataService;
 		friend class ATService;
 		
@@ -85,6 +86,7 @@ namespace AR
 		
 		Service *GetService(const std::string &name);
 		void PublishNavdata(Navdata *data);
+		void SetNeedsNavdataOptionsUpdate();
 		
 		std::atomic<State> _state;
 		std::string _droneIP;
@@ -107,6 +109,9 @@ namespace AR
 		bool _freshData;
 		
 		bool _demoFlag;
+		bool _needsNavdataOptionsUpdate;
+		
+		uint32_t _options;
 	};
 }
 
