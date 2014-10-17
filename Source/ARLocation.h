@@ -36,7 +36,7 @@ namespace AR
 		
 		double GetDistance(const Location &other) const
 		{
-			static double degreesToRadian = 3.14159265358979323846264338327950288 / 180.0;
+			static double degreesToRadian = M_PI / 180.0;
 			
 			double dlong = (other.longitude - longitude) * degreesToRadian;
 			double dlat  = (other.latitude - latitude) * degreesToRadian;
@@ -45,6 +45,21 @@ namespace AR
 			double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 			
 			return (c * 6367) * 1000.0;
+		}
+		
+		double GetHeading(const Location &other) const
+		{
+			static double degreesToRadian = M_PI / 180.0;
+			static double radianToDegress = 180.0 / M_PI;
+			
+			double flat  = latitude * degreesToRadian;
+			double flong = longitude * degreesToRadian;
+			
+			double tlat  = other.latitude * degreesToRadian;
+			double tlong = other.longitude * degreesToRadian;
+			
+			double heading = atan2(sin(tlong - flong) * cos(tlat), cos(flat) * sin(tlat) - sin(flat) * cos(tlat) * cos(tlong - flong));
+			return heading * radianToDegress;
 		}
 		
 		double latitude;
