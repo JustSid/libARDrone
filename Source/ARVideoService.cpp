@@ -158,12 +158,21 @@ namespace AR
 		size_t read = 0;
 		std::vector<uint8_t> buffer(32768);
 		
-		if(_socket->Receive(buffer.data(), buffer.size(), &read) == Socket::Result::Success)
+		Socket::Result result = _socket->Receive(buffer.data(), buffer.size(), &read);
+		
+		if(result == Socket::Result::Success)
 		{
 			buffer.resize(read);
 			
 			std::lock_guard<std::mutex> lock(_mutex);
 			_data.push_back(std::move(buffer));
+		}
+		else
+		{
+			_socket->Disconnect();
+			_bufferOffset = 0;
+			
+			SetState((_socket->Connect()) ? Service::State::Connected : Service::State::Disconnected);
 		}
 	}
 }
