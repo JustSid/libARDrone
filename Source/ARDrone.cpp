@@ -46,17 +46,23 @@ namespace AR
 	}
 	
 	
-	bool Drone::AddService(Service *service)
+	Service *Drone::AddService(Service *service)
 	{
 		std::lock_guard<std::recursive_mutex> lock(_lock);
 		
 		if(_state == State::Disconnected)
 		{
+			for(Service *temp : _services)
+			{
+				if(temp->GetName() == service->GetName())
+					return temp;
+			}
+			
 			_services.push_back(service);
-			return true;
+			return service;
 		}
 		
-		return false;
+		return nullptr;
 	}
 	
 	Service *Drone::GetService(const std::string &name)

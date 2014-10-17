@@ -62,11 +62,12 @@ namespace AR
 		T *AddService(Args&&... args)
 		{
 			T *service = new T(this, std::forward<Args>(args)...);
-			if(AddService(service))
-				return service;
+			T *result  = static_cast<T *>(AddService(service));
 			
-			delete service;
-			return nullptr;
+			if(result != service)
+				delete service;
+			
+			return result;
 		}
 		
 		void AddNavdataSubscriber(std::function<void(Navdata *data)> &&function, void *token);
@@ -83,7 +84,7 @@ namespace AR
 		const std::string &GetDroneIP() const { return _droneIP; }
 		
 	private:
-		bool AddService(Service *service);
+		Service *AddService(Service *service);
 		
 		Service *GetService(const std::string &name);
 		void PublishNavdata(Navdata *data);
