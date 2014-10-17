@@ -91,7 +91,8 @@ namespace AR
 				_socket->Send(string.c_str(), string.length());
 				
 				length = 0;
-				stream = std::stringstream();
+				stream.str("");
+				stream.clear();
 			}
 			
 			stream << command;

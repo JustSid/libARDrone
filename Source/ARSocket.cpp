@@ -18,6 +18,8 @@
 
 #include <unistd.h>
 #include <errno.h>
+#include <strings.h>
+#include <arpa/inet.h>
 #include "ARSocket.h"
 
 namespace AR
@@ -51,13 +53,13 @@ namespace AR
 		if(_type == Type::UDP)
 		{
 			_address.sin_family = AF_INET;
-			_address.sin_port   = HTONS(port);
+			_address.sin_port   = htons(port);
 			_address.sin_addr.s_addr = htonl(INADDR_ANY);
 			
 			port = _port;
 			
 			_sendAddress.sin_family = AF_INET;
-			_sendAddress.sin_port   = HTONS(port);
+			_sendAddress.sin_port   = htons(port);
 			
 			if(inet_aton(_ip.c_str(), &_sendAddress.sin_addr) == 0)
 				return false;
@@ -69,7 +71,7 @@ namespace AR
 		if(_type == Type::TCP)
 		{
 			_address.sin_family = AF_INET;
-			_address.sin_port   = HTONS(port);
+			_address.sin_port   = htons(port);
 			
 			if(inet_aton(_ip.c_str(), &_address.sin_addr) == 0)
 				return false;
