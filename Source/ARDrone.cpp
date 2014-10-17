@@ -24,7 +24,8 @@ namespace AR
 		_droneIP(droneIP),
 		_state(State::Disconnected),
 		_navdata(nullptr),
-		_freshData(false)
+		_freshData(false),
+		_navdataOptions(0)
 	{
 		_atService = new ATService(this, _droneIP);
 		_navdataService = new NavdataService(this, _droneIP);
@@ -81,7 +82,6 @@ namespace AR
 		
 		_needsNavdataOptionsUpdate = true;
 		_options = 0;
-		_navdataOptions = NavdataTagOptions(NavdataTag::Demo);
 		
 		_demoFlag = false;
 		
@@ -175,7 +175,7 @@ namespace AR
 			
 			if(_needsNavdataOptionsUpdate)
 			{
-				uint32_t options = _navdataOptions;
+				uint32_t options = _navdataOptions | NavdataOptions(AR::NavdataTag::Demo);
 				
 				for(Service *service : _services)
 					options |= service->GetNavdataOptions();
@@ -245,7 +245,7 @@ namespace AR
 	}
 	
 	
-	void Drone::AddNavdataOptions(uint32_t options)
+	void Drone::SetNavdataOptions(uint32_t options)
 	{
 		std::lock_guard<std::recursive_mutex> lock(_lock);
 		_needsNavdataOptionsUpdate = true;

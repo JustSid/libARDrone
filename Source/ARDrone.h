@@ -56,7 +56,7 @@ namespace AR
 		void Disconnect();
 		
 		bool Update();
-		void AddNavdataOptions(uint32_t options);
+		void SetNavdataOptions(uint32_t options);
 		
 		template<class T, class... Args>
 		T *AddService(Args&&... args)

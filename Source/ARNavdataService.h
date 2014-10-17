@@ -112,7 +112,7 @@ namespace AR
 	};
 	
 	template<class ...Args>
-	uint32_t NavdataTagOptions(Args... args)
+	uint32_t NavdataOptions(Args... args)
 	{
 		std::initializer_list<uint32_t> list { static_cast<uint32_t>(args)... };
 		uint32_t result = 0;
