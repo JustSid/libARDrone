@@ -144,7 +144,7 @@ namespace AR
 		Wakeup(WakeupReason::DataAvilable);
 	}
 	
-	std::string &ConfigService::GetConfig(const std::string &key)
+	std::string ConfigService::GetConfig(const std::string &key)
 	{
 		std::lock_guard<std::mutex> lock(_mutex);
 		return _config[key];

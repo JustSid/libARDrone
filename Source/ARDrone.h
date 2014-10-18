@@ -49,6 +49,12 @@ namespace AR
 			Connected
 		};
 		
+		enum class UltrasoundFrequency : uint32_t
+		{
+			Frequency22 = 7,
+			Freuqency25 = 8
+		};
+		
 		Drone(const std::string &droneIP);
 		~Drone();
 		
@@ -71,6 +77,13 @@ namespace AR
 			return result;
 		}
 		
+		// Drone configuration
+		void SetOutdoor(bool isOutdoor);
+		void SetOutdoorHull(bool outdoorHull);
+		void SetUtlrasoundFrequency(UltrasoundFrequency frequency);
+		void SetSSID(const std::string &ssid);
+		void SetName(const std::string &name);
+		
 		void AddNavdataSubscriber(std::function<void(Navdata *data)> &&function, void *token);
 		void RemoveNavdataSubscriber(void *token);
 		
@@ -86,8 +99,8 @@ namespace AR
 		
 	private:
 		Service *AddService(Service *service);
-		
 		Service *GetService(const std::string &name);
+		
 		void PublishNavdata(Navdata *data);
 		void SetNeedsNavdataOptionsUpdate();
 		

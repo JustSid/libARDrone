@@ -47,7 +47,34 @@ namespace AR
 		void SendConfig(const std::string &key, bool value, std::function<void(bool)> &&callback);
 		void SendConfig(const std::string &key, uint32_t value, std::function<void(bool)> &&callback);
 		void SendConfig(const std::string &key, const std::string &value, std::function<void(bool)> &&callback);
-		std::string &GetConfig(const std::string &key);
+		
+		std::string GetConfig(const std::string &key);
+		float GetConfigFloat(const std::string &key)
+		{
+			std::string value = GetConfig(key);
+			
+			union
+			{
+				int32_t i;
+				float f;
+			} bridge;
+			
+			bridge.i = std::stoi(value);
+			return bridge.f;
+		}
+		
+		int32_t GetConfigInt(const std::string &key)
+		{
+			std::string value = GetConfig(key);
+			return std::stoi(value);
+		}
+		
+		bool GetConfigBool(const std::string &key)
+		{
+			std::string value = GetConfig(key);
+			return (value == "TRUE") ? true : false;
+		}
+		
 		
 	protected:
 		void Tick(uint32_t reason) final;

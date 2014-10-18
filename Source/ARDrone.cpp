@@ -291,4 +291,30 @@ namespace AR
 		
 		_lastMessage = std::chrono::steady_clock::now();
 	}
+	
+	// Configuration
+	void Drone::SetOutdoor(bool isOutdoor)
+	{
+		_configService->SendConfig("control:outdoor", isOutdoor, nullptr);
+	}
+	
+	void Drone::SetOutdoorHull(bool outdoorHull)
+	{
+		_configService->SendConfig("￼control:flight_without_shell", outdoorHull, nullptr);
+	}
+	
+	void Drone::SetUtlrasoundFrequency(UltrasoundFrequency frequency)
+	{
+		_configService->SendConfig("pic:ultrasound_freq", static_cast<uint32_t>(frequency), nullptr);
+	}
+	
+	void Drone::SetSSID(const std::string &ssid)
+	{
+		_configService->SendConfig("network:ssid_single_player", ssid, nullptr);
+	}
+	
+	void Drone::SetName(const std::string &name)
+	{
+		_configService->SendConfig("general:ardrone_name", name, nullptr);
+	}
 }
