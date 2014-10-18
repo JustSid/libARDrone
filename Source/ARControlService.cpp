@@ -1,6 +1,6 @@
 //
 //  ARControlService.cpp
-//  libARDronde
+//  libARDrone
 //
 //  Created by Sidney Just
 //  Copyright (c) 2014 by Sidney Just
