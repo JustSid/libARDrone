@@ -327,6 +327,9 @@ namespace AR
 			case AutonomyState::Finished:
 			{
 				_control->Hover();
+				_wantsRunning = false;
+				_state = AutonomyState::Stopped;
+				
 				break;
 			}
 				
