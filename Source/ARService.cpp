@@ -44,11 +44,13 @@ namespace AR
 		
 		if(_state == State::Disconnected)
 		{
+			_canTick = false;
 			_thread = std::move(std::thread(&Service::ThreadHandler, this));
 			_state  = State::Connecting;
 			lock.unlock();
 			
 			_state = ConnectInternal();
+			_canTick = true;
 			
 			if(_state == State::Disconnected)
 			{
@@ -100,6 +102,11 @@ namespace AR
 		_state = state;
 	}
 	
+	void Service::SetCanTick()
+	{
+		_canTick = true;
+	}
+	
 	void Service::SetCanSleep(bool value)
 	{
 		_canSleep = value;
@@ -121,6 +128,9 @@ namespace AR
 	
 	void Service::ThreadHandler()
 	{
+		while(!_canTick)
+			std::this_thread::yield();
+		
 		while(1)
 		{
 			if(_canSleep)

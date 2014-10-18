@@ -71,6 +71,7 @@ namespace AR
 		virtual void Update();
 		
 		void SetCanSleep(bool value);
+		void SetCanTick();
 		void UpdateNavdataOptions(uint32_t options);
 		
 	private:
@@ -79,6 +80,7 @@ namespace AR
 		Drone *_drone;
 		
 		std::atomic<State> _state;
+		std::atomic<bool> _canTick;
 		std::string _name;
 		
 		std::mutex _mutex;

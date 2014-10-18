@@ -117,9 +117,6 @@ namespace AR
 	
 	void Drone::Disconnect()
 	{
-		if(_state == State::Disconnected)
-			return;
-		
 		for(Service *service : _services)
 		{
 			if(service == _atService || service == _configService || service == _navdataService)
@@ -131,6 +128,8 @@ namespace AR
 		_configService->Disconnect();
 		_navdataService->Disconnect();
 		_atService->Disconnect();
+		
+		_state = State::Disconnected;
 	}
 	
 	
