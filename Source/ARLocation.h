@@ -20,12 +20,15 @@
 #define __libARDrone__ARLocation__
 
 #include <math.h>
+#include <type_traits>
 
 namespace AR
 {
 	class Location
 	{
 	public:
+		Location() = default;
+		
 		Location(double tlatitude, double tlongitude) :
 			latitude(tlatitude),
 			longitude(tlongitude)
@@ -65,6 +68,8 @@ namespace AR
 		double latitude;
 		double longitude;
 	};
+	
+	static_assert(std::is_trivial<Location>::value, "Location must be a trivial type!");
 }
 
 #endif /* defined(__libARDrone__ARLocation__) */

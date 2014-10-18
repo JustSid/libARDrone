@@ -22,16 +22,14 @@
 #include <stdio.h>
 #include <math.h>
 #include <algorithm>
+#include <type_traits>
 
 namespace AR
 {
 	class Vector3
 	{
 	public:
-		Vector3()
-		{
-			x = y = z = 0.0f;
-		}
+		Vector3() = default;
 		
 		Vector3(const float n)
 		{
@@ -222,6 +220,8 @@ namespace AR
 			float z;
 		};
 	};
+	
+	static_assert(std::is_trivial<Vector3>::value, "Location must be a trivial type!");
 }
 
 #endif /* defined(__libARDrone__ARVector__) */
