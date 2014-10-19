@@ -58,6 +58,7 @@
 		E9304AF219F0A42C008F0983 /* ARAutonomousService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ARAutonomousService.cpp; sourceTree = "<group>"; };
 		E9304AF319F0A42C008F0983 /* ARAutonomousService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAutonomousService.h; sourceTree = "<group>"; };
 		E9304AF619F0A621008F0983 /* ARLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARLocation.h; sourceTree = "<group>"; };
+		E9575A0B19F3EBCA00B9D4C1 /* ARNavdataOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARNavdataOptions.h; sourceTree = "<group>"; };
 		E9A963BC19EACE2E00CBE6F6 /* libARDrone.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libARDrone.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A963EC19EACE6500CBE6F6 /* Example */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Example; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9A963EE19EACE6500CBE6F6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 				E9A963FE19EAD01D00CBE6F6 /* ARDrone.h */,
 				E9A963FF19EAD01D00CBE6F6 /* ARNavdataService.cpp */,
 				E9A9640019EAD01D00CBE6F6 /* ARNavdataService.h */,
+				E9575A0B19F3EBCA00B9D4C1 /* ARNavdataOptions.h */,
 				E9A9640119EAD01D00CBE6F6 /* ARService.cpp */,
 				E9A9640219EAD01D00CBE6F6 /* ARService.h */,
 				E9A9640319EAD01D00CBE6F6 /* ARSocket.cpp */,

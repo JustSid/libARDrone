@@ -106,7 +106,7 @@ namespace AR
 			return false;
 		
 		
-		Location location(gps->latitude, gps->longitude);
+		Location location = gps->location;
 		
 		double heading = location.GetHeading(waypoint->target);
 		double distance = location.GetDistance(waypoint->target);

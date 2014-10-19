@@ -16,6 +16,8 @@
 //  ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#define __ARNavdataServiceCPP 1 // So we pull in the ARNavdataCopyOption() macro
+
 #include "ARNavdataService.h"
 #include "ARDrone.h"
 
@@ -83,7 +85,7 @@ namespace AR
 		{
 			uint8_t buffer[4096];
 			__NavdataRaw data;
-		} x;
+		} bridge;
 		
 		if(!_opened)
 		{
@@ -92,7 +94,7 @@ namespace AR
 		}
 		
 		size_t received = 0;
-		Socket::Result result = _socket->Receive(x.buffer, 4096, &received);
+		Socket::Result result = _socket->Receive(bridge.buffer, 4096, &received);
 		
 		if(result == Socket::Result::Timeout)
 		{
@@ -100,15 +102,15 @@ namespace AR
 			return;
 		}
 		
-		if(result == Socket::Result::Success && x.data.header == 0x55667788)
+		if(result == Socket::Result::Success && bridge.data.header == 0x55667788)
 		{
 			SetState(State::Connected);
 			
 			Navdata *navdata = new Navdata();
 			
-			navdata->state    = x.data.state;
-			navdata->sequence = x.data.sequence;
-			navdata->vision   = x.data.vision;
+			navdata->state    = bridge.data.state;
+			navdata->sequence = bridge.data.sequence;
+			navdata->vision   = bridge.data.vision;
 			
 			if(navdata->sequence <= _sequence)
 			{
@@ -126,7 +128,7 @@ namespace AR
 				return;
 			}
 			
-			uint8_t *temp = x.buffer + sizeof(__NavdataRaw);
+			uint8_t *temp = bridge.buffer + sizeof(__NavdataRaw);
 			size_t left   = received - sizeof(__NavdataRaw);
 			
 			bool checksumVerified = false;
@@ -137,40 +139,33 @@ namespace AR
 				
 				switch(option->tag)
 				{
-					case NavdataTag::Demo:
-					{
-						NavdataOptionDemo *data = static_cast<NavdataOptionDemo *>(option);
-						navdata->options.emplace_back(new NavdataOptionDemo(*data));
-						break;
-					}
-						
-					case NavdataTag::RawMeasures:
-					{
-						NavdataOptionRawMeasures *data = static_cast<NavdataOptionRawMeasures *>(option);
-						navdata->options.emplace_back(new NavdataOptionRawMeasures(*data));
-						break;
-					}
-						
-					case NavdataTag::Magneto:
-					{
-						NavdataOptionMagneto *data = static_cast<NavdataOptionMagneto *>(option);
-						navdata->options.emplace_back(new NavdataOptionMagneto(*data));
-						break;
-					}
-						
-					case NavdataTag::GPS:
-					{
-						NavdataOptionGPS *data = static_cast<NavdataOptionGPS *>(option);
-						navdata->options.emplace_back(new NavdataOptionGPS(*data));
-						break;
-					}
-						
+					ARNavdataCopyOption(Demo)
+					ARNavdataCopyOption(Time)
+					ARNavdataCopyOption(RawMeasures)
+					ARNavdataCopyOption(PhysMeasures)
+					ARNavdataCopyOption(GyrosOffsets)
+					ARNavdataCopyOption(Trims)
+					ARNavdataCopyOption(RCReferences)
+					ARNavdataCopyOption(PWM)
+					ARNavdataCopyOption(Altitude)
+					ARNavdataCopyOption(VisionRaw)
+					// ARNavdataCopyOption(VisionOf)
+					ARNavdataCopyOption(Vision)
+					ARNavdataCopyOption(VisionPerf)
+					ARNavdataCopyOption(ADCDataFrame)
+					ARNavdataCopyOption(PressureRaw)
+					ARNavdataCopyOption(Magneto)
+					ARNavdataCopyOption(Wind)
+					ARNavdataCopyOption(KalmanPressure)
+					ARNavdataCopyOption(Wifi)
+					ARNavdataCopyOption(GPS)
+					
 					case NavdataTag::Checksum:
 					{
 						NavdataOptionChecksum *data = static_cast<NavdataOptionChecksum *>(option);
 						navdata->options.emplace_back(new NavdataOptionChecksum(*data));
 						
-						uint32_t checksum = CalculateChecksum(x.buffer, received - sizeof(NavdataOptionChecksum));
+						uint32_t checksum = CalculateChecksum(bridge.buffer, received - sizeof(NavdataOptionChecksum));
 						
 						if(checksum == data->checksum)
 							checksumVerified = true;
